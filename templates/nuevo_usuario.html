@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Nuevo Usuario{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Crear Nuevo Usuario</h1>
+    <form method="POST" action="{{ url_for('nuevo_usuario_web') }}">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="rol" class="form-label">Rol:</label>
+            <select class="form-select" id="rol" name="rol" required>
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+                <option value="admin">Administrador</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+        <a href="{{ url_for('usuarios_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

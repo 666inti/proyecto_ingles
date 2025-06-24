@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Estudiante{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Estudiante: {{ estudiante.usuario.nombre if estudiante.usuario else 'Desconocido' }}</h1>
+    <form method="POST" action="{{ url_for('editar_estudiante_web', id_estudiante=estudiante.id_estudiante) }}">
+        <div class="mb-3">
+            <label for="id_usuario" class="form-label">Usuario Asociado:</label>
+            <select class="form-select" id="id_usuario" name="id_usuario" required>
+                <option value="">Seleccione un usuario...</option>
+                {% for usuario in usuarios_disponibles %}
+                    <option value="{{ usuario.id_usuario }}" {% if usuario.id_usuario == estudiante.id_usuario %}selected{% endif %}>
+                        {{ usuario.nombre }} ({{ usuario.email }})
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">Asegúrate de que el usuario tenga el rol adecuado (estudiante).</small>
+        </div>
+        <div class="mb-3">
+            <label for="id_nivel" class="form-label">Nivel:</label>
+            <select class="form-select" id="id_nivel" name="id_nivel" required>
+                <option value="">Seleccione un nivel...</option>
+                {% for nivel in niveles_disponibles %}
+                    <option value="{{ nivel.id_nivel }}" {% if nivel.id_nivel == estudiante.id_nivel %}selected{% endif %}>
+                        {{ nivel.niveles }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ estudiante.fecha_nacimiento.strftime('%Y-%m-%d') }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Estudiante</button>
+        <a href="{{ url_for('estudiantes_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

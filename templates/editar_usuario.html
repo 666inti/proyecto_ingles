@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Usuario: {{ usuario.nombre }}</h1>
+    <form method="POST" action="{{ url_for('editar_usuario_web', id_usuario=usuario.id_usuario) }}">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ usuario.nombre }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ usuario.email }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Nueva Contraseña (dejar vacío para no cambiar):</label>
+            <input type="password" class="form-control" id="password" name="password">
+            <small class="form-text text-muted">Solo escribe si deseas cambiar la contraseña actual.</small>
+        </div>
+        <div class="mb-3">
+            <label for="rol" class="form-label">Rol:</label>
+            <select class="form-select" id="rol" name="rol" required>
+                <option value="estudiante" {% if usuario.rol == 'estudiante' %}selected{% endif %}>Estudiante</option>
+                <option value="profesor" {% if usuario.rol == 'profesor' %}selected{% endif %}>Profesor</option>
+                <option value="admin" {% if usuario.rol == 'admin' %}selected{% endif %}>Administrador</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+        <a href="{{ url_for('usuarios_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Nuevo Estudiante{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Registrar Nuevo Estudiante</h1>
+    <form method="POST" action="{{ url_for('nuevo_estudiante_web') }}">
+        <div class="mb-3">
+            <label for="id_usuario" class="form-label">Usuario Asociado:</label>
+            <select class="form-select" id="id_usuario" name="id_usuario" required>
+                <option value="">Seleccione un usuario...</option>
+                {% for usuario in usuarios_disponibles %}
+                    <option value="{{ usuario.id_usuario }}">{{ usuario.nombre }} ({{ usuario.email }})</option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">Asegúrate de que el usuario ya exista y tenga el rol adecuado (ej. "estudiante").</small>
+        </div>
+        <div class="mb-3">
+            <label for="id_nivel" class="form-label">Nivel:</label>
+            <select class="form-select" id="id_nivel" name="id_nivel" required>
+                <option value="">Seleccione un nivel...</option>
+                {% for nivel in niveles_disponibles %}
+                    <option value="{{ nivel.id_nivel }}">{{ nivel.niveles }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Estudiante</button>
+        <a href="{{ url_for('estudiantes_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

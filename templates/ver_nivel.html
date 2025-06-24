@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Nivel{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Detalles del Nivel</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ nivel.niveles }}</h5>
+            <p class="card-text"><strong>ID:</strong> {{ nivel.id_nivel }}</p>
+            <hr>
+            <a href="{{ url_for('editar_nivel_web', id_nivel=nivel.id_nivel) }}" class="btn btn-warning">Editar Nivel</a>
+            <a href="{{ url_for('niveles_web') }}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+    </div>
+{% endblock %}

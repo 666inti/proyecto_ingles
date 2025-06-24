@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Lección{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Crear Nueva Lección</h1>
+    <form method="POST" action="{{ url_for('nuevo_leccion_web') }}">
+        <div class="mb-3">
+            <label for="id_profesor" class="form-label">Profesor:</label>
+            <select class="form-select" id="id_profesor" name="id_profesor" required>
+                <option value="">Seleccione un profesor...</option>
+                {% for profesor in profesores_disponibles %}
+                    <option value="{{ profesor.id_profesor }}">
+                        {{ profesor.usuario.nombre if profesor.usuario else 'Profesor sin nombre' }} ({{ profesor.asignatura }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+        <div class="mb-3">
+            <label for="contenido" class="form-label">Contenido:</label>
+            <textarea class="form-control" id="contenido" name="contenido" rows="5" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="video" class="form-label">URL del Video (Opcional):</label>
+            <input type="url" class="form-control" id="video" name="video">
+        </div>
+        <div class="mb-3">
+            <label for="id_nivel" class="form-label">Nivel Asociado (Opcional):</label>
+            <select class="form-select" id="id_nivel" name="id_nivel">
+                <option value="">Ninguno</option>
+                {% for nivel in niveles_disponibles %}
+                    <option value="{{ nivel.id_nivel }}">
+                        {{ nivel.niveles }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Lección</button>
+        <a href="{{ url_for('lecciones_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

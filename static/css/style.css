@@ -1,0 +1,145 @@
+/* static/css/style.css */
+
+/* Importa la fuente Inter de Google Fonts (ya enlazada en base.html) */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; /* Un gris claro muy suave */
+    color: #333; /* Color de texto oscuro para buen contraste */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para la barra de navegación personalizada */
+.custom-navbar-gradient {
+    /* Degradado de azul oscuro a un azul-morado */
+    background: linear-gradient(90deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    color: #ffffff !important; /* Blanco puro para el logo */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8) !important; /* Texto de los enlaces un poco más claro */
+    transition: color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+.nav-link:hover {
+    color: #ffffff !important; /* Blanco al pasar el ratón */
+}
+
+.nav-link.active {
+    color: #ffffff !important;
+    font-weight: 600; /* Negrita para el elemento activo */
+    border-bottom: 2px solid #fdbb2d; /* Subrayado para el elemento activo */
+    padding-bottom: 5px;
+}
+
+/* Estilos para los botones de la barra de navegación (Cerrar Sesión, Iniciar Sesión) */
+.navbar .btn-outline-light {
+    color: #ffffff;
+    border-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #1a2a6c; /* Azul oscuro al pasar el ratón */
+}
+
+/* Estilos para el contenedor principal de la página */
+.container.py-4 {
+    flex: 1; /* Asegura que el contenido ocupe el espacio disponible y empuje el footer hacia abajo */
+    padding-bottom: 3rem !important; /* Añade más espacio al final para el footer */
+}
+
+/* Mejoras generales para las tarjetas (cards) */
+.card {
+    border: none; /* Elimina el borde predeterminado de Bootstrap */
+    border-radius: 0.75rem; /* Esquinas más redondeadas */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    transition: transform 0.2s ease-in-out; /* Animación al pasar el ratón */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+}
+
+.card-header {
+    background-color: #e9ecef; /* Un gris más oscuro para los encabezados de las tarjetas */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+/* Estilos para el pie de página (footer) */
+.footer {
+    background-color: #1a2a6c !important; /* Mismo azul oscuro que el inicio del degradado de la navbar */
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+/* Estilos para los botones generales (si quieres unificar un poco) */
+.btn-primary {
+    background-color: #007bff; /* Azul de Bootstrap */
+    border-color: #007bff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #333; /* Texto oscuro para el botón amarillo */
+}
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Asegúrate de que las imágenes se adapten al tamaño del contenedor */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}

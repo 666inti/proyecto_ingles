@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de la Lección{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Detalles de la Lección: {{ leccion.titulo }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ leccion.titulo }}</h5>
+            <p class="card-text"><strong>ID de Lección:</strong> {{ leccion.id_leccion }}</p>
+            <p class="card-text"><strong>Profesor:</strong> {{ leccion.profesor.usuario.nombre if leccion.profesor and leccion.profesor.usuario else 'N/A' }}</p>
+            <p class="card-text"><strong>Asignatura del Profesor:</strong> {{ leccion.profesor.asignatura if leccion.profesor else 'N/A' }}</p>
+            <p class="card-text"><strong>Nivel Asociado:</strong> {{ leccion.nivel_obj.niveles if leccion.nivel_obj else 'Ninguno' }}</p>
+            <p class="card-text"><strong>Contenido:</strong></p>
+            <div class="card p-3 mb-3 bg-light">{{ leccion.contenido }}</div>
+            {% if leccion.video %}
+                <p class="card-text"><strong>Video:</strong> <a href="{{ leccion.video }}" target="_blank">{{ leccion.video }}</a></p>
+                {# Puedes incrustar el video aquí si usas un reproductor compatible, por ejemplo YouTube #}
+            {% endif %}
+            <hr>
+            <a href="{{ url_for('editar_leccion_web', id_leccion=leccion.id_leccion) }}" class="btn btn-warning">Editar Lección</a>
+            <a href="{{ url_for('lecciones_web') }}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Estudiante{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Detalles del Estudiante</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ estudiante.usuario.nombre if estudiante.usuario else 'Estudiante Desconocido' }}</h5>
+            <p class="card-text"><strong>ID de Estudiante:</strong> {{ estudiante.id_estudiante }}</p>
+            <p class="card-text"><strong>Usuario Asociado (ID):</strong> {{ estudiante.id_usuario }}</p>
+            <p class="card-text"><strong>Email del Usuario:</strong> {{ estudiante.usuario.email if estudiante.usuario else 'N/A' }}</p>
+            <p class="card-text"><strong>Nivel:</strong> {{ estudiante.nivel_obj.niveles if estudiante.nivel_obj else 'N/A' }}</p>
+            <p class="card-text"><strong>Fecha de Nacimiento:</strong> {{ estudiante.fecha_nacimiento.strftime('%d/%m/%Y') }}</p>
+            <hr>
+            <a href="{{ url_for('editar_estudiante_web', id_estudiante=estudiante.id_estudiante) }}" class="btn btn-warning">Editar Estudiante</a>
+            <a href="{{ url_for('estudiantes_web') }}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+    </div>
+{% endblock %}

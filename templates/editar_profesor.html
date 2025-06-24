@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Profesor{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Profesor: {{ profesor.usuario.nombre if profesor.usuario else 'Desconocido' }}</h1>
+    <form method="POST" action="{{ url_for('editar_profesor_web', id_profesor=profesor.id_profesor) }}">
+        <div class="mb-3">
+            <label for="id_usuario" class="form-label">Usuario Asociado:</label>
+            <select class="form-select" id="id_usuario" name="id_usuario" required>
+                <option value="">Seleccione un usuario...</option>
+                {% for usuario in usuarios_disponibles %}
+                    <option value="{{ usuario.id_usuario }}" {% if usuario.id_usuario == profesor.id_usuario %}selected{% endif %}>
+                        {{ usuario.nombre }} ({{ usuario.email }})
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">Asegúrate de que el usuario tenga el rol adecuado (profesor).</small>
+        </div>
+        <div class="mb-3">
+            <label for="asignatura" class="form-label">Asignatura:</label>
+            <input type="text" class="form-control" id="asignatura" name="asignatura" value="{{ profesor.asignatura }}" required>
+            <small class="form-text text-muted">Ej: Gramática Inglesa, Conversación, Fonética</small>
+        </div>
+        <div class="mb-3">
+            <label for="id_nivel" class="form-label">Nivel Asociado (Opcional):</label>
+            <select class="form-select" id="id_nivel" name="id_nivel">
+                <option value="">Ninguno</option>
+                {% for nivel in niveles_disponibles %}
+                    <option value="{{ nivel.id_nivel }}" {% if nivel.id_nivel == profesor.id_nivel %}selected{% endif %}>
+                        {{ nivel.niveles }}
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">Si este profesor enseña en un nivel específico (Ej: Principiante).</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Profesor</button>
+        <a href="{{ url_for('profesores_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

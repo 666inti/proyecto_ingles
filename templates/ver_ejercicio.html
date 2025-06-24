@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Ejercicio{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Detalles del Ejercicio: {{ ejercicio.pregunta }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ ejercicio.pregunta }}</h5>
+            <p class="card-text"><strong>ID de Ejercicio:</strong> {{ ejercicio.id_ejercicio }}</p>
+            <p class="card-text"><strong>Lección Asociada:</strong> {{ ejercicio.leccion.titulo if ejercicio.leccion else 'N/A' }}</p>
+            <p class="card-text"><strong>Tipo:</strong> {{ ejercicio.tipo }}</p>
+            {% if ejercicio.opciones %}
+                <p class="card-text"><strong>Opciones:</strong> {{ ejercicio.opciones }}</p>
+            {% endif %}
+            <p class="card-text"><strong>Respuesta Correcta:</strong> {{ ejercicio.respuesta }}</p>
+            <hr>
+            <a href="{{ url_for('editar_ejercicio_web', id_ejercicio=ejercicio.id_ejercicio) }}" class="btn btn-warning">Editar Ejercicio</a>
+            <a href="{{ url_for('ejercicios_web') }}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+    </div>
+{% endblock %}

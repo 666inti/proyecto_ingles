@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    {# Reemplazo de jumbotron por una card más estilizada #}
+    <div class="card p-5 shadow-lg border-0 rounded-4 text-center mb-5">
+        <div class="card-body">
+            {% if session.get('user_rol') == 'estudiante' %}
+                <h1 class="display-4 text-primary mb-4">¡Bienvenido, Estudiante!</h1>
+                <p class="lead text-muted">Aquí puedes ver y empezar tus lecciones y ejercicios.</p>
+                <hr class="my-4">
+                <div class="row justify-content-center"> {# Centra las columnas en pantallas grandes #}
+                    <div class="col-md-6 col-lg-5 mb-4"> {# Ajuste de tamaño para columnas #}
+                        <div class="card h-100 shadow-sm border-0 rounded-3"> {# h-100 para altura igual #}
+                            <div class="card-body d-flex flex-column"> {# Flex para alinear contenido #}
+                                <h5 class="card-title text-dark mb-3"><i class="bi bi-book-half me-2"></i>Explora Lecciones</h5>
+                                <p class="card-text text-muted mb-4">Sumérgete en nuevas lecciones para mejorar tu inglés.</p>
+                                <div class="mt-auto"> {# Empuja el botón hacia abajo #}
+                                    <a href="{{ url_for('lecciones_web') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                                        Ir a Lecciones <i class="bi bi-arrow-right-circle ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 mb-4">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-dark mb-3"><i class="bi bi-pencil-square me-2"></i>Practica Ejercicios</h5>
+                                <p class="card-text text-muted mb-4">Pon a prueba tus conocimientos con ejercicios interactivos.</p>
+                                <div class="mt-auto">
+                                    <a href="{{ url_for('ejercicios_web') }}" class="btn btn-secondary rounded-pill px-4 shadow-sm">
+                                        Ir a Ejercicios <i class="bi bi-arrow-right-circle ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif session.get('user_rol') == 'profesor' %}
+                <h1 class="display-4 text-primary mb-4">¡Bienvenido, Profesor!</h1>
+                <p class="lead text-muted">Gestiona tus estudiantes, lecciones y ejercicios desde aquí.</p>
+                <hr class="my-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-dark mb-3"><i class="bi bi-people-fill me-2"></i>Gestionar Estudiantes</h5>
+                                <p class="card-text text-muted mb-4">Accede a la lista de tus estudiantes y su progreso.</p>
+                                <div class="mt-auto">
+                                    <a href="{{ url_for('estudiantes_web') }}" class="btn btn-info rounded-pill px-4 shadow-sm">
+                                        Ver Estudiantes <i class="bi bi-arrow-right-circle ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-dark mb-3"><i class="bi bi-journal-check me-2"></i>Gestionar Lecciones</h5>
+                                <p class="card-text text-muted mb-4">Administra las lecciones disponibles para tus alumnos.</p>
+                                <div class="mt-auto">
+                                    <a href="{{ url_for('lecciones_web') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                                        Ver Lecciones <i class="bi bi-arrow-right-circle ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-dark mb-3"><i class="bi bi-clipboard-check me-2"></i>Gestionar Ejercicios</h5>
+                                <p class="card-text text-muted mb-4">Crea y modifica los ejercicios para las lecciones.</p>
+                                <div class="mt-auto">
+                                    <a href="{{ url_for('ejercicios_web') }}" class="btn btn-secondary rounded-pill px-4 shadow-sm">
+                                        Ver Ejercicios <i class="bi bi-arrow-right-circle ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif session.get('user_rol') == 'admin' %}
+                <h1 class="display-4 text-primary mb-4">¡Bienvenido, Administrador!</h1>
+                <p class="lead text-muted">Usa el menú de navegación para acceder a la gestión completa de la aplicación.</p>
+                <hr class="my-4">
+                <p class="text-muted">Tienes acceso completo a todas las funcionalidades del sistema, incluyendo usuarios, niveles, estudiantes, profesores, lecciones y ejercicios.</p>
+            {% else %}
+                <h1 class="display-4 text-primary mb-4">¡Bienvenido!</h1>
+                <p class="lead text-muted">Por favor, inicia sesión para acceder a las funcionalidades de la aplicación.</p>
+                <hr class="my-4">
+                <p class="text-muted">Si no tienes una cuenta, puedes registrarte (o contactar a un administrador).</p>
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                    Iniciar Sesión <i class="bi bi-box-arrow-in-right ms-2"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

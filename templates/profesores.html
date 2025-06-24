@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Profesores{% endblock %}
+
+{% block content %}
+    {# Contenedor principal con estilo de tarjeta para una mejor presentación #}
+    <div class="card p-4 shadow-lg border-0 rounded-4"> {# Añadido padding, sombra, sin borde y esquinas redondeadas #}
+        <div class="card-body">
+            <h1 class="text-center mb-4 text-primary">Gestión de Profesores</h1> {# Título centrado, margen inferior y color primario #}
+            
+            {# Botón para registrar nuevo profesor #}
+            <a href="{{ url_for('nuevo_profesor_web') }}" class="btn btn-primary mb-4 rounded-pill px-4 shadow-sm">
+                {# Si has incluido Bootstrap Icons en tu base.html, este ícono aparecerá #}
+                <i class="bi bi-person-plus-fill me-2"></i> Registrar Nuevo Profesor
+            </a> {# Cambiado a btn-primary, redondeado, con padding, sombra y un ícono #}
+
+            {# Tabla de Profesores #}
+            <div class="table-responsive"> {# Hace la tabla responsive en pantallas pequeñas #}
+                <table class="table table-striped table-hover table-bordered align-middle"> {# Añadido table-hover, table-bordered y alineación vertical #}
+                    <thead class="table-dark"> {# Encabezado de tabla oscuro para mejor contraste #}
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre del Usuario</th>
+                            <th scope="col">Asignatura</th>
+                            <th scope="col">Nivel Asociado</th>
+                            <th scope="col" class="text-center">Acciones</th> {# Centrar el texto de la cabecera de acciones #}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profesor in profesores %}
+                        <tr>
+                            <td>{{ profesor.id_profesor }}</td>
+                            <td>{{ profesor.usuario.nombre if profesor.usuario else 'N/A' }}</td>
+                            <td>{{ profesor.asignatura }}</td>
+                            <td>{{ profesor.nivel_obj.niveles if profesor.nivel_obj else 'N/A' }}</td>
+                            <td>
+                                <div class="d-flex justify-content-center"> {# Usa flexbox para centrar y organizar los botones #}
+                                    <a href="{{ url_for('ver_profesor_web', id_profesor=profesor.id_profesor) }}" class="btn btn-info btn-sm me-2">Ver</a>
+                                    <a href="{{ url_for('editar_profesor_web', id_profesor=profesor.id_profesor) }}" class="btn btn-warning btn-sm me-2">Editar</a>
+                                    
+                                    {# Formulario para eliminar (más seguro que un simple enlace GET) #}
+                                    <form action="{{ url_for('eliminar_profesor_web', id_profesor=profesor.id_profesor) }}" method="POST" style="display:inline-block;">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar a este profesor?');">Eliminar</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-3">No hay profesores registrados.</td> {# Mensaje centrado y estilizado #}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

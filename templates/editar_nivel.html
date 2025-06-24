@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Nivel{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Nivel: {{ nivel.niveles }}</h1>
+    <form method="POST" action="{{ url_for('editar_nivel_web', id_nivel=nivel.id_nivel) }}">
+        <div class="mb-3">
+            <label for="niveles" class="form-label">Nombre del Nivel:</label>
+            <input type="text" class="form-control" id="niveles" name="niveles" value="{{ nivel.niveles }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Nivel</button>
+        <a href="{{ url_for('niveles_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

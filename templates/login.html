@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5 mb-5"> {# Añadido mb-5 para un margen inferior consistente #}
+        <div class="col-md-6 col-lg-4"> {# Ajuste de columnas para un formulario más centrado y compacto #}
+            <div class="card shadow-lg border-0 rounded-4"> {# Sombra grande, sin borde y esquinas muy redondeadas #}
+                <div class="card-header text-center bg-primary text-white py-3 rounded-top-4"> {# Encabezado con fondo primario, texto blanco, padding y redondeo superior #}
+                    <h3 class="mb-0">Iniciar Sesión</h3> {# Eliminar margen inferior predeterminado para el título #}
+                </div>
+                <div class="card-body p-4"> {# Añadido padding interno al cuerpo de la tarjeta #}
+                    <form action="{{ url_for('login') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-dark fw-bold">Correo Electrónico</label> {# Etiqueta con texto oscuro y negrita #}
+                            <div class="input-group"> {# Agrupar input para el icono #}
+                                <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span> {# Icono de email #}
+                                <input type="email" class="form-control rounded-end-pill" id="email" name="email" required placeholder="tu@ejemplo.com"> {# Input redondeado a la derecha, con placeholder #}
+                            </div>
+                        </div>
+                        <div class="mb-4"> {# Aumentado el margen inferior para el campo de contraseña #}
+                            <label for="password" class="form-label text-dark fw-bold">Contraseña</label> {# Etiqueta con texto oscuro y negrita #}
+                            <div class="input-group"> {# Agrupar input para el icono #}
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span> {# Icono de candado #}
+                                <input type="password" class="form-control rounded-end-pill" id="password" name="password" required placeholder="••••••••"> {# Input redondeado a la derecha, con placeholder #}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3 rounded-pill shadow-sm py-2"> {# Botón 100% ancho, redondeado, con sombra y padding vertical #}
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar Sesión
+                        </button>
+                    </form>
+                    {# Enlace para registrarse con estilo mejorado #}
+                    <p class="text-center text-muted">¿No tienes una cuenta? 
+                        <a href="#" class="text-primary fw-bold text-decoration-none"> {# Enlace con color primario, negrita y sin subrayado #}
+                            Regístrate aquí <i class="bi bi-person-plus-fill ms-1"></i> {# Icono de persona con signo más #}
+                        </a>
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

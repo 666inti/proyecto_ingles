@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Ejercicio{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Ejercicio: {{ ejercicio.pregunta }}</h1>
+    <form method="POST" action="{{ url_for('editar_ejercicio_web', id_ejercicio=ejercicio.id_ejercicio) }}">
+        <div class="mb-3">
+            <label for="id_leccion" class="form-label">Lección Asociada:</label>
+            <select class="form-select" id="id_leccion" name="id_leccion" required>
+                <option value="">Seleccione una lección...</option>
+                {% for leccion in lecciones_disponibles %}
+                    <option value="{{ leccion.id_leccion }}" {% if leccion.id_leccion == ejercicio.id_leccion %}selected{% endif %}>
+                        {{ leccion.titulo }} (Profesor: {{ leccion.profesor.usuario.nombre if leccion.profesor and leccion.profesor.usuario else 'N/A' }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="pregunta" class="form-label">Pregunta:</label>
+            <textarea class="form-control" id="pregunta" name="pregunta" rows="3" required>{{ ejercicio.pregunta }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo de Ejercicio:</label>
+            <select class="form-select" id="tipo" name="tipo" required>
+                <option value="">Seleccione un tipo...</option>
+                <option value="multiple_choice" {% if ejercicio.tipo == 'multiple_choice' %}selected{% endif %}>Opción Múltiple</option>
+                <option value="fill_in_the_blank" {% if ejercicio.tipo == 'fill_in_the_blank' %}selected{% endif %}>Completar Espacios</option>
+                <option value="short_answer" {% if ejercicio.tipo == 'short_answer' %}selected{% endif %}>Respuesta Corta</option>
+            </select>
+        </div>
+        <div class="mb-3" id="opciones_field" style="display:none;">
+            <label for="opciones" class="form-label">Opciones (separadas por coma para Opción Múltiple):</label>
+            <input type="text" class="form-control" id="opciones" name="opciones" value="{{ ejercicio.opciones if ejercicio.opciones else '' }}">
+            <small class="form-text text-muted">Ej: opcion1,opcion2,opcion3</small>
+        </div>
+        <div class="mb-3">
+            <label for="respuesta" class="form-label">Respuesta Correcta:</label>
+            <input type="text" class="form-control" id="respuesta" name="respuesta" value="{{ ejercicio.respuesta }}" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Actualizar Ejercicio</button>
+        <a href="{{ url_for('ejercicios_web') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+    <script>
+        // JavaScript para mostrar/ocultar el campo de opciones según el tipo de ejercicio
+        document.addEventListener('DOMContentLoaded', function() {
+            const tipoSelect = document.getElementById('tipo');
+            const opcionesField = document.getElementById('opciones_field');
+
+            function toggleOpcionesField() {
+                if (tipoSelect.value === 'multiple_choice') {
+                    opcionesField.style.display = 'block';
+                } else {
+                    opcionesField.style.display = 'none';
+                }
+            }
+
+            tipoSelect.addEventListener('change', toggleOpcionesField);
+            toggleOpcionesField(); // Llama al cargar la página para establecer el estado inicial
+        });
+    </script>
+{% endblock %}

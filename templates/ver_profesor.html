@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Profesor{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Detalles del Profesor</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ profesor.usuario.nombre if profesor.usuario else 'Profesor Desconocido' }}</h5>
+            <p class="card-text"><strong>ID de Profesor:</strong> {{ profesor.id_profesor }}</p>
+            <p class="card-text"><strong>Usuario Asociado (ID):</strong> {{ profesor.id_usuario }}</p>
+            <p class="card-text"><strong>Email del Usuario:</strong> {{ profesor.usuario.email if profesor.usuario else 'N/A' }}</p>
+            <p class="card-text"><strong>Asignatura:</strong> {{ profesor.asignatura }}</p>
+            <p class="card-text"><strong>Nivel Asociado:</strong> {{ profesor.nivel_obj.niveles if profesor.nivel_obj else 'Ninguno' }}</p>
+            <hr>
+            <a href="{{ url_for('editar_profesor_web', id_profesor=profesor.id_profesor) }}" class="btn btn-warning">Editar Profesor</a>
+            <a href="{{ url_for('profesores_web') }}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+    </div>
+{% endblock %}
